@@ -780,7 +780,7 @@ function initVisualization() {
 
     // Create scene, camera, and renderer
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x111111);
+    scene.background = new THREE.Color(0xffffff);
 
     const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
     camera.position.z = 15;
@@ -825,8 +825,8 @@ function initVisualization() {
     // Add points for each cat breed
     const catPoints = [];
     const colors = [
-        0xff4c4c, 0x4c4cff, 0x4cff4c, 0xffff4c, 0xff4cff, 0x4cffff,
-        0xffaa4c, 0x4cffaa, 0xaa4cff, 0xff4caa, 0xaa4c4c, 0x4c4caa
+        0x9e7bb5, 0x8cb9d3, 0xb8d8be, 0xf2d5a9, 0xeaafd1, 0xa5c9c9,
+        0xd2c1a5, 0xb5c7b5, 0xc3b5d3, 0xd3a5ad, 0xc9b199, 0x9da5c9
     ];
 
     // Add a sphere for each cat breed
@@ -838,28 +838,38 @@ function initVisualization() {
         const geometry = new THREE.SphereGeometry(0.15, 16, 16);
         const material = new THREE.MeshPhongMaterial({ color: colors[index % colors.length] });
         const sphere = new THREE.Mesh(geometry, material);
-        
+
         // Store cat breed data for selection
         const originalCat = cats.find(c => c.breed === cat.breed);
         sphere.userData = originalCat;
-        
+
         sphere.position.set(x, y, z);
         scene.add(sphere);
 
         // Add label (breed name) as sprite
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
-        canvas.width = 256;
-        canvas.height = 64;
-        context.font = '24px Arial';
-        context.fillStyle = 'white';
-        context.fillText(cat.breed, 0, 24);
+        canvas.width = 512;
+        canvas.height = 128;
+        context.scale(2, 2); // Scale for higher resolution
+        context.font = 'bold 24px "EB Garamond", Garamond, serif';
+        context.textBaseline = 'middle';
+        context.textAlign = 'center';
+        context.fillStyle = '#333';
+        // Apply text stroke for better readability
+        context.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+        context.lineWidth = 3;
+        context.strokeText(cat.breed, 128, 32);
+        context.fillText(cat.breed, 128, 32);
 
         const texture = new THREE.CanvasTexture(canvas);
-        const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+        const spriteMaterial = new THREE.SpriteMaterial({
+            map: texture,
+            sizeAttenuation: true
+        });
         const sprite = new THREE.Sprite(spriteMaterial);
-        sprite.position.set(x, y + 0.1, z);
-        sprite.scale.set(3, 0.75, 1);
+        sprite.position.set(x, y + 0.3, z);
+        sprite.scale.set(2, 0.5, 1);
         scene.add(sprite);
 
         catPoints.push({ sphere, sprite, breed: cat.breed, x, y, z });
@@ -873,7 +883,7 @@ function initVisualization() {
         new THREE.Vector3(-axisLength, 0, 0),
         new THREE.Vector3(axisLength, 0, 0)
     ]);
-    const xAxisMaterial = new THREE.LineBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.5 });
+    const xAxisMaterial = new THREE.LineBasicMaterial({ color: 0xd9b3ff, transparent: true, opacity: 0.5 });
     const xAxis = new THREE.Line(xAxisGeometry, xAxisMaterial);
     scene.add(xAxis);
 
@@ -882,7 +892,7 @@ function initVisualization() {
         new THREE.Vector3(0, -axisLength, 0),
         new THREE.Vector3(0, axisLength, 0)
     ]);
-    const yAxisMaterial = new THREE.LineBasicMaterial({ color: 0x00ff00, transparent: true, opacity: 0.5 });
+    const yAxisMaterial = new THREE.LineBasicMaterial({ color: 0xb3d9ff, transparent: true, opacity: 0.5 });
     const yAxis = new THREE.Line(yAxisGeometry, yAxisMaterial);
     scene.add(yAxis);
 
@@ -891,7 +901,7 @@ function initVisualization() {
         new THREE.Vector3(0, 0, -axisLength),
         new THREE.Vector3(0, 0, axisLength)
     ]);
-    const zAxisMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff, transparent: true, opacity: 0.5 });
+    const zAxisMaterial = new THREE.LineBasicMaterial({ color: 0xffccb3, transparent: true, opacity: 0.5 });
     const zAxis = new THREE.Line(zAxisGeometry, zAxisMaterial);
     scene.add(zAxis);
 
@@ -939,6 +949,207 @@ function initVisualization() {
         camera.updateProjectionMatrix();
 
         renderer.setSize(newWidth, newHeight);
+    });
+
+    // Add raycaster for cat selection
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    // Cat breed descriptions
+    const breedDescriptions = {
+        "Maine Coon": "The Maine Coon is one of the largest domestic cat breeds, known for their tufted ears, bushy tails, and shaggy coats. They're friendly gentle giants with playful personalities and dog-like loyalty.",
+        "Persian": "Persians are known for their long, luxurious coats and flat faces. They're sweet, quiet cats that prefer a calm environment and enjoy lounging rather than climbing or jumping.",
+        "Siamese": "Siamese cats are sleek, vocal, and highly intelligent. Known for their striking blue eyes and color-point coats, they form strong bonds with their people and are often quite demanding of attention.",
+        "Ragdoll": "Ragdolls are large, affectionate cats known for going limp when picked up. With their striking blue eyes and semi-longhair coats, they're gentle companions who follow their owners from room to room.",
+        "Bengal": "Bengals have wild-looking spotted coats but domestic temperaments. Active and athletic, they love to climb, play in water, and need plenty of stimulation. Their coat has a unique, plush feel unlike other cats.",
+        "Sphynx": "The hairless Sphynx is warm and soft to touch with an outgoing, attention-seeking personality. Despite lacking fur, they require regular bathing to remove skin oils and are very affectionate, heat-seeking missiles.",
+        "Scottish Fold": "Famous for their folded ears and round faces, Scottish Folds are sweet-tempered and adaptable cats. They're moderately active and enjoy interactive play while maintaining a calm demeanor.",
+        "British Shorthair": "British Shorthairs are sturdy, dignified cats with dense plush coats. Known for their reserved yet affectionate nature, they're low-maintenance companions who prefer four-on-the-floor to being carried.",
+        "Abyssinian": "The Abyssinian is one of the oldest known cat breeds, with a ticked coat and lithe body. Active and highly intelligent, these cats need engaging toys and plenty of playtime to stay happy.",
+        "Russian Blue": "Russian Blues have plush, silvery-blue coats and emerald green eyes. Reserved with strangers but loyal to their families, they're quiet, clean cats with a gentle demeanor and playful side.",
+        "Norwegian Forest Cat": "The Norwegian Forest Cat is large, semi-longhaired, and built for harsh Scandinavian winters. They're skilled climbers with water-resistant coats, independent yet friendly with a strong hunting instinct.",
+        "Domestic Shorthair": "Domestic Shorthairs are the 'mutts' of the cat world—varied in appearance but often healthy and well-balanced in temperament. They're America's most common cats, coming in endless color variations.",
+        "Munchkin": "Munchkins are characterized by their short legs caused by a natural genetic mutation. Despite their short stature, they're energetic, playful cats who can still run and jump, just not as high as other breeds.",
+        "Devon Rex": "With large ears and wavy, downy-soft coat, the Devon Rex is often called the 'pixie cat' or 'poodle cat.' They're incredibly social, mischievous, and remain kitten-like well into adulthood.",
+        "Burmese": "Burmese cats are medium-sized with muscular bodies and golden eyes. Incredibly people-oriented, they're often described as 'dog-like' in their loyalty and desire to be involved in everything their humans do.",
+        "Savannah": "Savannahs are a hybrid breed created by crossing domestic cats with African Servals. They're extremely athletic with long legs, distinctive spotted coats, and dog-like personalities including loyalty and ability to be walked on a leash.",
+        "Birman": "Birmans are semi-longhaired color-point cats with distinctive white 'gloves' on all four paws. They're gentle, patient cats with soft voices who adapt well to most household situations and other pets.",
+        "Egyptian Mau": "The Egyptian Mau is the only naturally spotted domestic cat breed. They're extremely fast runners with a graceful gait, moderately active, somewhat shy with strangers but devoted to their families.",
+        "Cornish Rex": "With their wavy coat, large ears, and egg-shaped head, Cornish Rex cats are distinctive in appearance. They're extraordinarily playful, remaining kitten-like well into old age, and are warm to the touch due to their thin coat.",
+        "Bombay": "The Bombay was developed to resemble a miniature black panther. With gleaming black coats and copper eyes, they're medium-sized, muscular cats who are affectionate and often form strong bonds with one person.",
+        "Himalayan": "Himalayans combine the body type of a Persian with the colorpoint pattern of a Siamese. They share the Persian's sweet, gentle temperament but tend to be a bit more active and playful.",
+        "Exotic Shorthair": "Often called 'the lazy man's Persian,' Exotic Shorthairs have the Persian's teddy-bear look with a short, plush coat that requires less grooming. They're quiet, loyal companions who enjoy playtime but don't demand it.",
+        "Tonkinese": "Tonkinese cats are a cross between Siamese and Burmese, with a medium build and moderate voice. Social and intelligent, they thrive on interaction and can learn tricks, follow commands, and even walk on leashes.",
+        "American Shorthair": "American Shorthairs are sturdy, athletic cats developed from working cats who traveled with early settlers. They're adaptable, good-natured companions with strong hunting instincts and moderate activity levels.",
+        "Turkish Van": "The Turkish Van is known as the 'swimming cat' due to their unusual love of water. They have a unique cashmere-like coat that's water-resistant, and they're athletic, intelligent cats who bond strongly with their people."
+    };
+
+    // Mapping between our breed names and The Cat API breed IDs
+    const catApiBreedMap = {
+        "Maine Coon": "mcoo",
+        "Persian": "pers",
+        "Siamese": "siam",
+        "Ragdoll": "ragd",
+        "Bengal": "beng",
+        "Sphynx": "sphy",
+        "Scottish Fold": "sfol",
+        "British Shorthair": "bsho",
+        "Abyssinian": "abys",
+        "Russian Blue": "rblu",
+        "Norwegian Forest Cat": "norw",
+        "Domestic Shorthair": "dsh", // not an official API breed
+        "Munchkin": "munc",
+        "Devon Rex": "drex",
+        "Burmese": "burm",
+        "Savannah": "sava",
+        "Birman": "birm",
+        "Egyptian Mau": "emau",
+        "Cornish Rex": "crex",
+        "Bombay": "bomb",
+        "Himalayan": "hima",
+        "Exotic Shorthair": "esho",
+        "Tonkinese": "tonk",
+        "American Shorthair": "asho",
+        "Turkish Van": "tvan"
+    };
+
+    // Function to update breed information panel
+    async function showBreedInfo(cat) {
+        const breedStatsElement = document.getElementById('breed-stats');
+
+        let html = `
+            <h3>${cat.breed}</h3>
+            <div class="image-loading">Loading image...</div>
+            <p class="breed-description">${breedDescriptions[cat.breed] || "No description available."}</p>
+            <div class="stat-grid">
+        `;
+
+        // Add stats with visual bars
+        const attributes = [
+            { name: 'Size', value: cat.size },
+            { name: 'Energy', value: cat.energy },
+            { name: 'Shedding', value: cat.shedding },
+            { name: 'Vocal', value: cat.vocal },
+            { name: 'Friendly', value: cat.friendly },
+            { name: 'Independence', value: cat.independence },
+            { name: 'Grooming Needs', value: cat.grooming },
+            { name: 'Affection', value: cat.affection },
+            { name: 'Intelligence', value: cat.intelligence },
+            { name: 'Child Friendly', value: cat.child_friendly },
+            { name: 'Pet Friendly', value: cat.pet_friendly },
+            { name: 'Health', value: cat.health },
+            { name: 'Lifespan', value: cat.lifespan },
+            { name: 'Adaptability', value: cat.adaptability },
+            { name: 'Indoor Preference', value: cat.indoor_preference },
+            { name: 'Daytime Activity', value: cat.daytime_active },
+            { name: 'Cost', value: cat.cost },
+            { name: 'Hunting Instinct', value: cat.hunting }
+        ];
+
+        attributes.forEach(attr => {
+            html += `
+                <div class="stat-item">
+                    <span class="stat-label">${attr.name}:</span>
+                    <div class="stat-bar-container">
+                        <div class="stat-bar" style="width: ${attr.value * 10}%"></div>
+                    </div>
+                </div>
+            `;
+        });
+
+        html += '</div>';
+        breedStatsElement.innerHTML = html;
+
+        // Fetch cat image from The Cat API
+        try {
+            // Set the API key from .env file
+            const apiKey = 'live_3kkCJsM8fhgmuAgUj8mvs0uY7G5JnmNRLozt5NS9ebXHoAY4gtqOY38fjuJ23Lii';
+            axios.defaults.headers.common['x-api-key'] = apiKey;
+
+            // Get the Cat API breed ID
+            const breedId = catApiBreedMap[cat.breed];
+
+            // Default parameters if we don't have a specific breed mapping
+            let params = { limit: 1, size: "med" };
+
+            // If we have a specific breed ID, include it in the query
+            if (breedId) {
+                params.breed_ids = breedId;
+            } else {
+                // If no breed ID, search by breed name
+                params.q = cat.breed;
+            }
+
+            // Make the API request
+            const response = await axios.get('https://api.thecatapi.com/v1/images/search', { params });
+
+            if (response.data && response.data.length > 0) {
+                const imageUrl = response.data[0].url;
+
+                // Create an image element to preload the image
+                const img = new Image();
+                img.onload = function() {
+                    // Once loaded, update the HTML to replace the loading message with the actual image
+                    const imageContainer = breedStatsElement.querySelector('.image-loading');
+                    if (imageContainer) {
+                        imageContainer.outerHTML = `<div class="breed-image" style="background-image: url('${imageUrl}')"></div>`;
+                    }
+                };
+                img.src = imageUrl;
+            } else {
+                // If no image found, show an error message
+                const imageContainer = breedStatsElement.querySelector('.image-loading');
+                if (imageContainer) {
+                    imageContainer.innerHTML = "No image available";
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching cat image:', error);
+            // Update the loading message to show the error
+            const imageContainer = breedStatsElement.querySelector('.image-loading');
+            if (imageContainer) {
+                imageContainer.innerHTML = "Error loading image";
+            }
+        }
+    }
+
+    // Add click event to select cats
+    container.addEventListener('click', (event) => {
+        // Calculate mouse position in normalized device coordinates (-1 to +1)
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        // Update the picking ray with the camera and mouse position
+        raycaster.setFromCamera(mouse, camera);
+
+        // Calculate objects intersecting the picking ray
+        const intersects = raycaster.intersectObjects(scene.children, true);
+
+        // Find first intersected sphere that has cat data
+        for (let i = 0; i < intersects.length; i++) {
+            const object = intersects[i].object;
+            if (object.type === 'Mesh' && object.userData.breed) {
+                // Highlight selected cat
+                object.material.emissive.set(0x555555);
+                setTimeout(() => {
+                    object.material.emissive.set(0x000000);
+                }, 300);
+
+                // Show the cat info
+                showBreedInfo(object.userData);
+
+                // If overlay is hidden, show it
+                const overlayContainer = document.querySelector('.overlay-container');
+                const toggleButton = document.getElementById('toggle-ui');
+                if (overlayContainer.classList.contains('hidden')) {
+                    overlayContainer.classList.remove('hidden');
+                    toggleButton.classList.remove('hidden');
+                    toggleButton.textContent = 'Hide Questionnaire';
+                }
+
+                break;
+            }
+        }
     });
 
     animate();

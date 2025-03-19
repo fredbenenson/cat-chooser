@@ -2,12 +2,12 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: 'EB Garamond', 'Garamond', serif;
 }
 
 body {
-    background-color: #000;
-    color: #fff;
+    background-color: #fff;
+    color: #333;
     line-height: 1.6;
     overflow: hidden; /* Prevent scrolling */
     height: 100vh;
@@ -55,17 +55,17 @@ button {
 }
 
 #yes-btn {
-    background-color: #4CAF50;
+    background-color: #9e7bb5;
     color: white;
 }
 
 #no-btn {
-    background-color: #f44336;
+    background-color: #d3a5ad;
     color: white;
 }
 
 #restart-btn {
-    background-color: #2196F3;
+    background-color: #8cb9d3;
     color: white;
     display: block;
     margin: 20px auto 0;
@@ -113,8 +113,8 @@ button:hover {
 /* Tooltip styling for cat breed labels */
 .cat-tooltip {
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
     padding: 5px 10px;
     border-radius: 5px;
     font-size: 14px;
@@ -125,6 +125,7 @@ button:hover {
     white-space: nowrap;
     opacity: 0;
     transition: opacity 0.2s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .visualization-info {
@@ -133,11 +134,12 @@ button:hover {
     left: 20px;
     text-align: left;
     font-size: 16px;
-    color: #fff;
+    color: #333;
     z-index: 2;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.7);
     padding: 10px;
     border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .overlay-container {
@@ -146,11 +148,12 @@ button:hover {
     right: 0;
     width: 450px;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(255, 255, 255, 0.85);
     overflow-y: auto;
     z-index: 3;
     padding: 20px;
     transition: transform 0.3s ease;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .overlay-container.hidden {
@@ -162,13 +165,14 @@ button:hover {
     top: 20px;
     right: 470px;
     z-index: 4;
-    background-color: #2196F3;
+    background-color: #9e7bb5;
     color: white;
     border: none;
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
     transition: right 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .toggle-button.hidden {
@@ -189,25 +193,26 @@ button:hover {
 
 /* Breed information section */
 .breed-info {
-    background-color: rgba(20, 20, 20, 0.7);
+    background-color: rgba(240, 240, 240, 0.7);
     border-radius: 5px;
     padding: 15px;
     margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .breed-info h2 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     margin-bottom: 15px;
-    color: #2196F3;
+    color: #7a5c8d;
 }
 
 .breed-stats {
-    color: #fff;
+    color: #333;
 }
 
 .select-prompt {
     text-align: center;
-    color: #aaa;
+    color: #888;
     font-style: italic;
     padding: 20px 0;
 }
@@ -225,29 +230,51 @@ button:hover {
 }
 
 .stat-label {
-    font-size: 0.9rem;
-    color: #ccc;
+    font-size: 0.95rem;
+    color: #555;
     flex: 1;
 }
 
 .stat-bar-container {
     flex: 1;
     height: 8px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(200, 200, 200, 0.3);
     border-radius: 4px;
     overflow: hidden;
 }
 
 .stat-bar {
     height: 100%;
-    background-color: #2196F3;
+    background-color: #9e7bb5;
 }
 
 .breed-description {
     margin-top: 15px;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: #ddd;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+.breed-image {
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+    margin: 15px 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    background-color: rgba(230, 230, 230, 0.5);
+    color: #666;
+    font-style: italic;
 }
 
 #slider-value {
@@ -257,8 +284,10 @@ button:hover {
 }
 
 #next-btn {
-    background-color: #2196F3;
+    background-color: #9e7bb5;
     color: white;
     display: block;
     margin: 0 auto;
+    padding: 10px 20px;
+    font-family: 'EB Garamond', serif;
 }
