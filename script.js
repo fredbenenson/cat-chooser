@@ -1107,7 +1107,7 @@ function initVisualization() {
                     // Once loaded, update the HTML to replace the loading message with the actual image
                     const imageContainer = breedStatsElement.querySelector('.image-loading');
                     if (imageContainer) {
-                        imageContainer.outerHTML = `<div class="breed-image" style="background-image: url('${imageUrl}')"></div>`;
+                        imageContainer.outerHTML = `<div class="breed-image"><img src="${imageUrl}" alt="${cat.breed} cat"></div>`;
                     }
                 };
                 img.src = imageUrl;
