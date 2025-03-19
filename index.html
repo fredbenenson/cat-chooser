@@ -17,21 +17,24 @@
     </div>
     <div class="overlay-container">
         <div class="container">
-            <h1>Cat Adoption Helper</h1>
             <div id="breed-info" class="breed-info">
                 <h2>Cat Breed Information</h2>
                 <div id="breed-stats" class="breed-stats">
                     <p class="select-prompt">Click on a cat in the visualization to see details</p>
                 </div>
             </div>
+        <div class= "container"><h2>Find your perfect cat companion!</h2></div>
         <div id="question-container">
-            <h2 id="question">Let's find your perfect cat companion!</h2>
+            <h3 id="question"></h3>
             <div id="scale-container">
-                <p class="rating-label"><strong>Rate importance:</strong> 0 (not important) → 10 (very important)</p>
+                <p class="rating-label"><strong>Rate importance:</strong>
+                    <br>0 (not important) → 10 (very important)</p>
                 <div class="slider-container">
                     <input type="range" min="0" max="10" value="5" class="slider" id="importance-slider">
                     <span id="slider-value">5</span>
+
                 </div>
+
                 <button id="next-btn">Next</button>
             </div>
         </div>
@@ -39,6 +42,17 @@
             <h2>Your Perfect Match</h2>
             <div id="result"></div>
             <button id="restart-btn">Start Over</button>
+        </div>
+        <div id="site-info">
+            <div>What do these dimensions mean? <a href="https://github.com/fredbenenson/cat-chooser/?tab=readme-ov-file#how-pca-works-in-simple-terms">Read about Cat PCA.</a></div>
+            <br>
+            <hr>
+            <br>
+            <div>creator: <a href="http://fredbenenson.com/">Fred Benenson</a> + <a href="https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview">Claude Code</a></div>
+
+            <div>source code: <a href="https://github.com/fredbenenson/cat-chooser/">github</a></div>
+            <div>special thanks: <a href="https://thecatapi.com/">The Cat API</a></div>
+
         </div>
     </div>
     <button id="toggle-ui" class="toggle-button">Toggle Questionnaire</button>

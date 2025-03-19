@@ -292,3 +292,12 @@ button:hover {
     padding: 10px 20px;
     font-family: 'EB Garamond', serif;
 }
+
+.site-info {
+    background-color: rgba(240, 240, 240, 0.7);
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    color: #888;
+}
