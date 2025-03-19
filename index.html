@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Adoption Helper</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+    <div id="visualization"></div>
+    <div class="visualization-info">
+        <p>3D PCA visualization of cat breed traits</p>
+    </div>
+    <div class="overlay-container">
+        <div class="container">
+            <h1>Cat Adoption Helper</h1>
+            <div id="breed-info" class="breed-info">
+                <h2>Cat Breed Information</h2>
+                <div id="breed-stats" class="breed-stats">
+                    <p class="select-prompt">Click on a cat in the visualization to see details</p>
+                </div>
+            </div>
+        <div id="question-container">
+            <h2 id="question">Let's find your perfect cat companion!</h2>
+            <div id="scale-container">
+                <p class="rating-label"><strong>Rate importance:</strong> 0 (not important) → 10 (very important)</p>
+                <div class="slider-container">
+                    <input type="range" min="0" max="10" value="5" class="slider" id="importance-slider">
+                    <span id="slider-value">5</span>
+                </div>
+                <button id="next-btn">Next</button>
+            </div>
+        </div>
+        <div id="result-container" style="display: none;">
+            <h2>Your Perfect Match</h2>
+            <div id="result"></div>
+            <button id="restart-btn">Start Over</button>
+        </div>
+    </div>
+    <button id="toggle-ui" class="toggle-button">Toggle Questionnaire</button>
+    <script src="script.js"></script>
+</body>
+</html>

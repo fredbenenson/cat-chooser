@@ -1,0 +1,264 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+    line-height: 1.6;
+    overflow: hidden; /* Prevent scrolling */
+    height: 100vh;
+    position: relative;
+}
+
+.container {
+    width: 100%;
+    padding: 20px;
+    background-color: transparent;
+    border-radius: 5px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+#question-container, #result-container {
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+}
+
+#question {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#yes-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#no-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+#restart-btn {
+    background-color: #2196F3;
+    color: white;
+    display: block;
+    margin: 20px auto 0;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+#result {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.results-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.results-list li {
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.rating-label {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #555;
+}
+
+#visualization {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+/* Tooltip styling for cat breed labels */
+.cat-tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 100;
+    transform: translate(-50%, -100%);
+    margin-top: -10px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.visualization-info {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-align: left;
+    font-size: 16px;
+    color: #fff;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.overlay-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 450px;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow-y: auto;
+    z-index: 3;
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.overlay-container.hidden {
+    transform: translateX(450px);
+}
+
+.toggle-button {
+    position: absolute;
+    top: 20px;
+    right: 470px;
+    z-index: 4;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: right 0.3s ease;
+}
+
+.toggle-button.hidden {
+    right: 20px;
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.slider {
+    width: 80%;
+    margin-right: 10px;
+}
+
+/* Breed information section */
+.breed-info {
+    background-color: rgba(20, 20, 20, 0.7);
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.breed-info h2 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: #2196F3;
+}
+
+.breed-stats {
+    color: #fff;
+}
+
+.select-prompt {
+    text-align: center;
+    color: #aaa;
+    font-style: italic;
+    padding: 20px 0;
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #ccc;
+    flex: 1;
+}
+
+.stat-bar-container {
+    flex: 1;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.stat-bar {
+    height: 100%;
+    background-color: #2196F3;
+}
+
+.breed-description {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #ddd;
+}
+
+#slider-value {
+    font-weight: bold;
+    width: 30px;
+    text-align: center;
+}
+
+#next-btn {
+    background-color: #2196F3;
+    color: white;
+    display: block;
+    margin: 0 auto;
+}
