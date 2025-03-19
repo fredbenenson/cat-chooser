@@ -636,6 +636,9 @@ function findMatch() {
     // Sort by shortest distance (best match first)
     catsWithDistance.sort((a, b) => a.distance - b.distance);
 
+    // Visualize the user's ideal point in 3D space
+    visualizeUserPreferences();
+
     showResult(catsWithDistance);
 }
 
@@ -654,6 +657,8 @@ function showResult(rankedCats) {
     });
 
     resultHTML += '</ul>';
+    resultHTML += '<p>Your ideal cat is now shown as a red sphere in the 3D visualization.</p>';
+    resultHTML += '<p>Explore the space to see which cats are closest to your preferences!</p>';
     resultElement.innerHTML = resultHTML;
 }
 
@@ -770,8 +775,17 @@ function calculatePCA(data) {
         return projection;
     });
 
-    return projectedData;
+    return {
+        projectedData, 
+        means, 
+        principalComponents,
+        attributes
+    };
 }
+
+// Define scene, camera, and other global variables for visualization
+let scene, camera, renderer, controls, pcaResult, scaleFactor;
+let userIdealSphere; // Reference to user's ideal point sphere
 
 function initVisualization() {
     const container = document.getElementById('visualization');
@@ -779,18 +793,18 @@ function initVisualization() {
     const height = container.clientHeight;
 
     // Create scene, camera, and renderer
-    const scene = new THREE.Scene();
+    scene = new THREE.Scene();
     scene.background = new THREE.Color(0xffffff);
 
-    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
     camera.position.z = 15;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);
     container.appendChild(renderer.domElement);
 
     // Add OrbitControls for interaction
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true; // Add smooth damping effect
     controls.dampingFactor = 0.05;
     controls.rotateSpeed = 0.7;
@@ -808,19 +822,20 @@ function initVisualization() {
     scene.add(directionalLight);
 
     // Prepare PCA data
-    const pcaData = calculatePCA(cats);
+    pcaResult = calculatePCA(cats);
+    const { projectedData } = pcaResult;
 
     // Determine scale factors for normalization
-    const pc1Values = pcaData.map(d => d.PC1);
-    const pc2Values = pcaData.map(d => d.PC2);
-    const pc3Values = pcaData.map(d => d.PC3);
+    const pc1Values = projectedData.map(d => d.PC1);
+    const pc2Values = projectedData.map(d => d.PC2);
+    const pc3Values = projectedData.map(d => d.PC3);
 
     const pc1Range = Math.max(...pc1Values) - Math.min(...pc1Values);
     const pc2Range = Math.max(...pc2Values) - Math.min(...pc2Values);
     const pc3Range = Math.max(...pc3Values) - Math.min(...pc3Values);
 
     const maxRange = Math.max(pc1Range, pc2Range, pc3Range);
-    const scaleFactor = 10 / maxRange;
+    scaleFactor = 10 / maxRange;
 
     // Add points for each cat breed
     const catPoints = [];
@@ -830,7 +845,7 @@ function initVisualization() {
     ];
 
     // Add a sphere for each cat breed
-    pcaData.forEach((cat, index) => {
+    projectedData.forEach((cat, index) => {
         const x = cat.PC1 * scaleFactor;
         const y = cat.PC2 * scaleFactor;
         const z = cat.PC3 * scaleFactor;
@@ -1153,6 +1168,108 @@ function initVisualization() {
     });
 
     animate();
+}
+
+// Function to visualize user preferences in the 3D space
+function visualizeUserPreferences() {
+    if (!scene) return; // Ensure visualization is initialized
+
+    // Remove existing user ideal point if it exists
+    if (userIdealSphere) {
+        scene.remove(userIdealSphere);
+        // Also remove any connecting lines or labels if they exist
+        // (implementation would go here)
+    }
+
+    const { means, principalComponents, attributes } = pcaResult;
+
+    // Create a synthetic "ideal cat" based on user preferences
+    const idealCat = {};
+    
+    // For each attribute, use either the user's preference or the average value
+    attributes.forEach(attr => {
+        if (attr in userPreferences && userPreferences[attr] > 0) {
+            // If the user cares about this attribute (importance > 0)
+            // Use a high value (10) for positive attributes, and a low value (0) for invert attributes
+            const isInverted = questions.find(q => q.attribute === attr)?.invert;
+            idealCat[attr] = isInverted ? 0 : 10;
+        } else {
+            // Use the average value for attributes the user doesn't care about
+            idealCat[attr] = means[attr];
+        }
+    });
+
+    // Project the ideal cat onto PCA space
+    const projectedIdeal = {};
+    principalComponents.forEach(pc => {
+        projectedIdeal[pc.axis] = attributes.reduce((sum, attr) => {
+            return sum + (idealCat[attr] - means[attr]) * pc.weights[attr];
+        }, 0);
+    });
+
+    // Scale the coordinates
+    const x = projectedIdeal.PC1 * scaleFactor;
+    const y = projectedIdeal.PC2 * scaleFactor;
+    const z = projectedIdeal.PC3 * scaleFactor;
+
+    // Create a sphere for the ideal point
+    const geometry = new THREE.SphereGeometry(0.3, 32, 32);
+    const material = new THREE.MeshPhongMaterial({ 
+        color: 0xff5555,
+        emissive: 0x331111,
+        shininess: 80
+    });
+    userIdealSphere = new THREE.Mesh(geometry, material);
+    userIdealSphere.position.set(x, y, z);
+    scene.add(userIdealSphere);
+
+    // Add a pulsing effect to make it stand out
+    const pulseAnimation = () => {
+        if (!userIdealSphere) return;
+        
+        const time = Date.now() * 0.001; // Convert to seconds
+        const scale = 1 + 0.1 * Math.sin(time * 3); // Oscillate between 0.9 and 1.1
+        
+        userIdealSphere.scale.set(scale, scale, scale);
+        requestAnimationFrame(pulseAnimation);
+    };
+    pulseAnimation();
+
+    // Add "Your Ideal Cat" label
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    canvas.width = 512;
+    canvas.height = 128;
+    context.scale(2, 2); // Scale for higher resolution
+    context.font = 'bold 20px "EB Garamond", Garamond, serif';
+    context.textBaseline = 'middle';
+    context.textAlign = 'center';
+    context.fillStyle = '#ff3333';
+    // Apply text stroke for better readability
+    context.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+    context.lineWidth = 3;
+    context.strokeText('★ Your Ideal Cat ★', 128, 32);
+    context.fillText('★ Your Ideal Cat ★', 128, 32);
+
+    const texture = new THREE.CanvasTexture(canvas);
+    const spriteMaterial = new THREE.SpriteMaterial({
+        map: texture,
+        sizeAttenuation: true
+    });
+    const sprite = new THREE.Sprite(spriteMaterial);
+    sprite.position.set(x, y + 0.5, z);
+    sprite.scale.set(2.5, 0.6, 1);
+    sprite.userData = { isIdealLabel: true };
+    scene.add(sprite);
+
+    // Make sure the label always faces the camera
+    const updateSpriteRotation = () => {
+        if (sprite) {
+            sprite.quaternion.copy(camera.quaternion);
+            requestAnimationFrame(updateSpriteRotation);
+        }
+    };
+    updateSpriteRotation();
 }
 
 // UI Toggle functionality

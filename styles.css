@@ -79,6 +79,7 @@ button:hover {
     text-align: center;
     font-size: 18px;
     margin-bottom: 20px;
+    line-height: 1.6;
 }
 
 .results-list {
