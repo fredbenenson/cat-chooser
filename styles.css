@@ -111,8 +111,8 @@ button:hover {
     z-index: 1;
 }
 
-/* Tooltip styling for cat breed labels */
-.cat-tooltip {
+/* Tooltip styling for dog breed labels */
+.dog-tooltip {
     position: absolute;
     background-color: rgba(255, 255, 255, 0.9);
     color: #333;

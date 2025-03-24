@@ -1,554 +1,3 @@
-// Cat data with attributes (each attribute is 0-10 scale)
-const cats = [
-    {
-        breed: "Maine Coon",
-        size: 8,
-        energy: 5,
-        shedding: 8,
-        vocal: 5,
-        friendly: 7,
-        independence: 5,
-        grooming: 7,
-        affection: 7,
-        intelligence: 8,
-        child_friendly: 8,
-        pet_friendly: 7,
-        health: 6,
-        lifespan: 7,
-        adaptability: 6,
-        indoor_preference: 6,
-        daytime_active: 6,
-        cost: 7,
-        hunting: 8
-    },
-    {
-        breed: "Persian",
-        size: 5,
-        energy: 3,
-        shedding: 8,
-        vocal: 2,
-        friendly: 4,
-        independence: 8,
-        grooming: 10,
-        affection: 6,
-        intelligence: 5,
-        child_friendly: 5,
-        pet_friendly: 5,
-        health: 4,
-        lifespan: 6,
-        adaptability: 3,
-        indoor_preference: 9,
-        daytime_active: 4,
-        cost: 8,
-        hunting: 2
-    },
-    {
-        breed: "Siamese",
-        size: 5,
-        energy: 8,
-        shedding: 3,
-        vocal: 9,
-        friendly: 7,
-        independence: 3,
-        grooming: 3,
-        affection: 8,
-        intelligence: 9,
-        child_friendly: 6,
-        pet_friendly: 6,
-        health: 7,
-        lifespan: 8,
-        adaptability: 6,
-        indoor_preference: 7,
-        daytime_active: 7,
-        cost: 6,
-        hunting: 7
-    },
-    {
-        breed: "Ragdoll",
-        size: 8,
-        energy: 3,
-        shedding: 5,
-        vocal: 2,
-        friendly: 9,
-        independence: 2,
-        grooming: 6,
-        affection: 10,
-        intelligence: 7,
-        child_friendly: 9,
-        pet_friendly: 8,
-        health: 5,
-        lifespan: 6,
-        adaptability: 5,
-        indoor_preference: 10,
-        daytime_active: 5,
-        cost: 7,
-        hunting: 2
-    },
-    {
-        breed: "Bengal",
-        size: 6,
-        energy: 9,
-        shedding: 3,
-        vocal: 6,
-        friendly: 7,
-        independence: 5,
-        grooming: 2,
-        affection: 6,
-        intelligence: 9,
-        child_friendly: 5,
-        pet_friendly: 5,
-        health: 7,
-        lifespan: 7,
-        adaptability: 6,
-        indoor_preference: 3,
-        daytime_active: 8,
-        cost: 9,
-        hunting: 10
-    },
-    {
-        breed: "Sphynx",
-        size: 5,
-        energy: 8,
-        shedding: 0,
-        vocal: 6,
-        friendly: 9,
-        independence: 3,
-        grooming: 7,
-        affection: 9,
-        intelligence: 8,
-        child_friendly: 7,
-        pet_friendly: 7,
-        health: 6,
-        lifespan: 6,
-        adaptability: 7,
-        indoor_preference: 10,
-        daytime_active: 7,
-        cost: 9,
-        hunting: 5
-    },
-    {
-        breed: "Scottish Fold",
-        size: 5,
-        energy: 5,
-        shedding: 5,
-        vocal: 2,
-        friendly: 8,
-        independence: 5,
-        grooming: 4,
-        affection: 8,
-        intelligence: 7,
-        child_friendly: 8,
-        pet_friendly: 7,
-        health: 4,
-        lifespan: 5,
-        adaptability: 7,
-        indoor_preference: 8,
-        daytime_active: 6,
-        cost: 7,
-        hunting: 5
-    },
-    {
-        breed: "British Shorthair",
-        size: 6,
-        energy: 3,
-        shedding: 5,
-        vocal: 2,
-        friendly: 4,
-        independence: 8,
-        grooming: 3,
-        affection: 5,
-        intelligence: 6,
-        child_friendly: 7,
-        pet_friendly: 6,
-        health: 7,
-        lifespan: 7,
-        adaptability: 5,
-        indoor_preference: 8,
-        daytime_active: 5,
-        cost: 6,
-        hunting: 5
-    },
-    {
-        breed: "Abyssinian",
-        size: 5,
-        energy: 8,
-        shedding: 3,
-        vocal: 5,
-        friendly: 7,
-        independence: 6,
-        grooming: 2,
-        affection: 6,
-        intelligence: 9,
-        child_friendly: 6,
-        pet_friendly: 6,
-        health: 8,
-        lifespan: 8,
-        adaptability: 8,
-        indoor_preference: 5,
-        daytime_active: 9,
-        cost: 6,
-        hunting: 9
-    },
-    {
-        breed: "Russian Blue",
-        size: 5,
-        energy: 5,
-        shedding: 3,
-        vocal: 2,
-        friendly: 3,
-        independence: 7,
-        grooming: 3,
-        affection: 5,
-        intelligence: 7,
-        child_friendly: 5,
-        pet_friendly: 6,
-        health: 9,
-        lifespan: 9,
-        adaptability: 5,
-        indoor_preference: 8,
-        daytime_active: 5,
-        cost: 5,
-        hunting: 7
-    },
-    {
-        breed: "Norwegian Forest Cat",
-        size: 9,
-        energy: 6,
-        shedding: 8,
-        vocal: 3,
-        friendly: 7,
-        independence: 6,
-        grooming: 7,
-        affection: 6,
-        intelligence: 7,
-        child_friendly: 7,
-        pet_friendly: 7,
-        health: 7,
-        lifespan: 7,
-        adaptability: 7,
-        indoor_preference: 5,
-        daytime_active: 6,
-        cost: 7,
-        hunting: 8
-    },
-    {
-        breed: "Domestic Shorthair",
-        size: 5,
-        energy: 5,
-        shedding: 5,
-        vocal: 5,
-        friendly: 6,
-        independence: 5,
-        grooming: 3,
-        affection: 6,
-        intelligence: 6,
-        child_friendly: 6,
-        pet_friendly: 6,
-        health: 8,
-        lifespan: 8,
-        adaptability: 8,
-        indoor_preference: 7,
-        daytime_active: 6,
-        cost: 2,
-        hunting: 6
-    },
-    {
-        breed: "Munchkin",
-        size: 3,
-        energy: 7,
-        shedding: 5,
-        vocal: 4,
-        friendly: 8,
-        independence: 4,
-        grooming: 5,
-        affection: 8,
-        intelligence: 7,
-        child_friendly: 7,
-        pet_friendly: 7,
-        health: 5,
-        lifespan: 5,
-        adaptability: 6,
-        indoor_preference: 9,
-        daytime_active: 6,
-        cost: 8,
-        hunting: 4
-    },
-    {
-        breed: "Devon Rex",
-        size: 4,
-        energy: 9,
-        shedding: 2,
-        vocal: 5,
-        friendly: 9,
-        independence: 3,
-        grooming: 2,
-        affection: 9,
-        intelligence: 8,
-        child_friendly: 8,
-        pet_friendly: 7,
-        health: 6,
-        lifespan: 7,
-        adaptability: 8,
-        indoor_preference: 9,
-        daytime_active: 8,
-        cost: 8,
-        hunting: 6
-    },
-    {
-        breed: "Burmese",
-        size: 4,
-        energy: 6,
-        shedding: 3,
-        vocal: 6,
-        friendly: 8,
-        independence: 3,
-        grooming: 2,
-        affection: 9,
-        intelligence: 8,
-        child_friendly: 8,
-        pet_friendly: 7,
-        health: 7,
-        lifespan: 8,
-        adaptability: 7,
-        indoor_preference: 9,
-        daytime_active: 6,
-        cost: 7,
-        hunting: 6
-    },
-    {
-        breed: "Savannah",
-        size: 7,
-        energy: 10,
-        shedding: 3,
-        vocal: 7,
-        friendly: 6,
-        independence: 6,
-        grooming: 2,
-        affection: 5,
-        intelligence: 10,
-        child_friendly: 5,
-        pet_friendly: 4,
-        health: 7,
-        lifespan: 7,
-        adaptability: 5,
-        indoor_preference: 2,
-        daytime_active: 8,
-        cost: 10,
-        hunting: 10
-    },
-    {
-        breed: "Birman",
-        size: 6,
-        energy: 4,
-        shedding: 6,
-        vocal: 3,
-        friendly: 8,
-        independence: 4,
-        grooming: 6,
-        affection: 8,
-        intelligence: 7,
-        child_friendly: 8,
-        pet_friendly: 8,
-        health: 7,
-        lifespan: 7,
-        adaptability: 6,
-        indoor_preference: 9,
-        daytime_active: 5,
-        cost: 7,
-        hunting: 4
-    },
-    {
-        breed: "Egyptian Mau",
-        size: 5,
-        energy: 7,
-        shedding: 3,
-        vocal: 4,
-        friendly: 6,
-        independence: 6,
-        grooming: 3,
-        affection: 6,
-        intelligence: 8,
-        child_friendly: 6,
-        pet_friendly: 5,
-        health: 8,
-        lifespan: 8,
-        adaptability: 7,
-        indoor_preference: 6,
-        daytime_active: 7,
-        cost: 8,
-        hunting: 9
-    },
-    {
-        breed: "Cornish Rex",
-        size: 4,
-        energy: 9,
-        shedding: 1,
-        vocal: 5,
-        friendly: 8,
-        independence: 3,
-        grooming: 2,
-        affection: 8,
-        intelligence: 8,
-        child_friendly: 7,
-        pet_friendly: 7,
-        health: 6,
-        lifespan: 7,
-        adaptability: 8,
-        indoor_preference: 10,
-        daytime_active: 7,
-        cost: 7,
-        hunting: 7
-    },
-    {
-        breed: "Bombay",
-        size: 5,
-        energy: 6,
-        shedding: 3,
-        vocal: 4,
-        friendly: 7,
-        independence: 5,
-        grooming: 2,
-        affection: 8,
-        intelligence: 7,
-        child_friendly: 7,
-        pet_friendly: 7,
-        health: 7,
-        lifespan: 7,
-        adaptability: 7,
-        indoor_preference: 8,
-        daytime_active: 6,
-        cost: 6,
-        hunting: 6
-    },
-    {
-        breed: "Himalayan",
-        size: 6,
-        energy: 3,
-        shedding: 8,
-        vocal: 3,
-        friendly: 5,
-        independence: 7,
-        grooming: 10,
-        affection: 7,
-        intelligence: 6,
-        child_friendly: 5,
-        pet_friendly: 6,
-        health: 4,
-        lifespan: 6,
-        adaptability: 4,
-        indoor_preference: 10,
-        daytime_active: 4,
-        cost: 8,
-        hunting: 3
-    },
-    {
-        breed: "Exotic Shorthair",
-        size: 5,
-        energy: 3,
-        shedding: 4,
-        vocal: 2,
-        friendly: 6,
-        independence: 6,
-        grooming: 5,
-        affection: 8,
-        intelligence: 6,
-        child_friendly: 7,
-        pet_friendly: 6,
-        health: 5,
-        lifespan: 6,
-        adaptability: 5,
-        indoor_preference: 9,
-        daytime_active: 4,
-        cost: 7,
-        hunting: 3
-    },
-    {
-        breed: "Tonkinese",
-        size: 4,
-        energy: 7,
-        shedding: 2,
-        vocal: 7,
-        friendly: 8,
-        independence: 4,
-        grooming: 2,
-        affection: 9,
-        intelligence: 8,
-        child_friendly: 7,
-        pet_friendly: 7,
-        health: 7,
-        lifespan: 7,
-        adaptability: 7,
-        indoor_preference: 8,
-        daytime_active: 7,
-        cost: 7,
-        hunting: 6
-    },
-    {
-        breed: "American Shorthair",
-        size: 5,
-        energy: 5,
-        shedding: 5,
-        vocal: 3,
-        friendly: 7,
-        independence: 6,
-        grooming: 3,
-        affection: 6,
-        intelligence: 7,
-        child_friendly: 8,
-        pet_friendly: 7,
-        health: 8,
-        lifespan: 8,
-        adaptability: 8,
-        indoor_preference: 7,
-        daytime_active: 6,
-        cost: 5,
-        hunting: 7
-    },
-    {
-        breed: "Turkish Van",
-        size: 7,
-        energy: 7,
-        shedding: 5,
-        vocal: 6,
-        friendly: 6,
-        independence: 7,
-        grooming: 4,
-        affection: 6,
-        intelligence: 7,
-        child_friendly: 6,
-        pet_friendly: 5,
-        health: 8,
-        lifespan: 8,
-        adaptability: 6,
-        indoor_preference: 5,
-        daytime_active: 7,
-        cost: 7,
-        hunting: 8
-    }
-];
-
-// Questions to ask the user
-const questions = [
-    { id: "size", question: "How important is having a larger cat?", attribute: "size" },
-    { id: "energy", question: "How important is having an energetic, playful cat?", attribute: "energy" },
-    { id: "shedding", question: "How concerned are you about shedding? (10 = very concerned)", attribute: "shedding", invert: true },
-    { id: "vocal", question: "How important is having a talkative cat?", attribute: "vocal" },
-    { id: "friendly", question: "How important is having a cat that's social and friendly with strangers?", attribute: "friendly" },
-    { id: "independence", question: "How important is having a cat that's independent and can be left alone?", attribute: "independence" },
-    { id: "grooming", question: "How concerned are you about grooming requirements? (10 = very concerned)", attribute: "grooming", invert: true },
-    { id: "affection", question: "How important is having an affectionate, cuddly cat?", attribute: "affection" },
-    { id: "intelligence", question: "How important is having an intelligent, trainable cat?", attribute: "intelligence" },
-    { id: "child_friendly", question: "How important is having a cat that gets along well with children?", attribute: "child_friendly" },
-    { id: "pet_friendly", question: "How important is having a cat that gets along with other pets?", attribute: "pet_friendly" },
-    { id: "health", question: "How important is having a breed with fewer health issues?", attribute: "health" },
-    { id: "lifespan", question: "How important is having a cat with a longer lifespan?", attribute: "lifespan" },
-    { id: "adaptability", question: "How important is having a cat that adapts well to changes?", attribute: "adaptability" },
-    { id: "indoor_preference", question: "How important is having a cat that prefers to stay indoors?", attribute: "indoor_preference" },
-    { id: "daytime_active", question: "How important is having a cat that's active during the day rather than night?", attribute: "daytime_active" },
-    { id: "cost", question: "How concerned are you about the cost of ownership? (10 = very concerned)", attribute: "cost", invert: true },
-    { id: "hunting", question: "How important is having a cat with strong hunting instincts?", attribute: "hunting" }
-];
-
 // DOM elements
 const questionElement = document.getElementById('question');
 const scaleContainer = document.getElementById('scale-container');
@@ -600,8 +49,8 @@ function storePreference() {
     }
 }
 
-// Calculate cartesian distance between user preferences and cat attributes
-function calculateDistance(cat) {
+// Calculate cartesian distance between user preferences and dog attributes
+function calculateDistance(dog) {
     let distanceSquared = 0;
 
     for (const attribute in userPreferences) {
@@ -610,7 +59,7 @@ function calculateDistance(cat) {
         if (importance > 0) { // Only consider attributes the user cares about
             const normalizedImportance = importance / 10; // Normalize to 0-1
 
-            let attributeScore = cat[attribute];
+            let attributeScore = dog[attribute];
             // If this is a concern-type question that should be inverted
             if (questions.find(q => q.attribute === attribute)?.invert) {
                 attributeScore = 10 - attributeScore; // Invert the scale
@@ -627,38 +76,38 @@ function calculateDistance(cat) {
 
 // Find the best match based on cartesian distance
 function findMatch() {
-    // Calculate distance for each cat
-    const catsWithDistance = cats.map(cat => ({
-        ...cat,
-        distance: calculateDistance(cat)
+    // Calculate distance for each dog
+    const dogsWithDistance = dogs.map(dog => ({
+        ...dog,
+        distance: calculateDistance(dog)
     }));
 
     // Sort by shortest distance (best match first)
-    catsWithDistance.sort((a, b) => a.distance - b.distance);
+    dogsWithDistance.sort((a, b) => a.distance - b.distance);
 
     // Visualize the user's ideal point in 3D space
     visualizeUserPreferences();
 
-    showResult(catsWithDistance);
+    showResult(dogsWithDistance);
 }
 
 // Show the result
-function showResult(rankedCats) {
+function showResult(rankedDogs) {
     questionContainer.style.display = 'none';
     resultContainer.style.display = 'block';
 
     // Return the top 3 matches
-    const topMatches = rankedCats.slice(0, 3);
+    const topMatches = rankedDogs.slice(0, 3);
     let resultHTML = '<p>Your top matches are:</p><ul class="results-list">';
 
-    topMatches.forEach((cat, index) => {
-        const matchPercentage = Math.round((1 - (cat.distance / 10)) * 100);
-        resultHTML += `<li><strong>${cat.breed}</strong> - ${matchPercentage}% match</li>`;
+    topMatches.forEach((dog, index) => {
+        const matchPercentage = Math.round((1 - (dog.distance / 10)) * 100);
+        resultHTML += `<li><strong>${dog.breed}</strong> - ${matchPercentage}% match</li>`;
     });
 
     resultHTML += '</ul>';
-    resultHTML += '<p>Your ideal cat is now shown as a red sphere in the 3D visualization.</p>';
-    resultHTML += '<p>Explore the space to see which cats are closest to your preferences!</p>';
+    resultHTML += '<p>Your ideal dog is now shown as a red sphere in the 3D visualization.</p>';
+    resultHTML += '<p>Explore the space to see which dogs are closest to your preferences!</p>';
     resultElement.innerHTML = resultHTML;
 }
 
@@ -681,14 +130,14 @@ function calculatePCA(data) {
 
     // Calculate means for each attribute
     attributes.forEach(attr => {
-        means[attr] = data.reduce((sum, cat) => sum + cat[attr], 0) / data.length;
+        means[attr] = data.reduce((sum, dog) => sum + dog[attr], 0) / data.length;
     });
 
     // Center the data by subtracting means
-    const centeredData = data.map(cat => {
+    const centeredData = data.map(dog => {
         const centered = {};
         attributes.forEach(attr => {
-            centered[attr] = cat[attr] - means[attr];
+            centered[attr] = dog[attr] - means[attr];
         });
         return centered;
     });
@@ -698,8 +147,8 @@ function calculatePCA(data) {
     attributes.forEach(attr1 => {
         covMatrix[attr1] = {};
         attributes.forEach(attr2 => {
-            covMatrix[attr1][attr2] = centeredData.reduce((sum, cat) => {
-                return sum + cat[attr1] * cat[attr2];
+            covMatrix[attr1][attr2] = centeredData.reduce((sum, dog) => {
+                return sum + dog[attr1] * dog[attr2];
             }, 0) / (data.length - 1);
         });
     });
@@ -764,14 +213,14 @@ function calculatePCA(data) {
     principalComponents.push(pc1, pc2, pc3);
 
     // Project data onto principal components
-    const projectedData = data.map(cat => {
+    const projectedData = data.map(dog => {
         const projection = {};
         principalComponents.forEach(pc => {
             projection[pc.axis] = attributes.reduce((sum, attr) => {
-                return sum + (cat[attr] - means[attr]) * pc.weights[attr];
+                return sum + (dog[attr] - means[attr]) * pc.weights[attr];
             }, 0);
         });
-        projection.breed = cat.breed;
+        projection.breed = dog.breed;
         return projection;
     });
 
@@ -822,7 +271,7 @@ function initVisualization() {
     scene.add(directionalLight);
 
     // Prepare PCA data
-    pcaResult = calculatePCA(cats);
+    pcaResult = calculatePCA(dogs);
     const { projectedData } = pcaResult;
 
     // Determine scale factors for normalization
@@ -837,26 +286,26 @@ function initVisualization() {
     const maxRange = Math.max(pc1Range, pc2Range, pc3Range);
     scaleFactor = 10 / maxRange;
 
-    // Add points for each cat breed
-    const catPoints = [];
+    // Add points for each dog breed
+    const dogPoints = [];
     const colors = [
         0x9e7bb5, 0x8cb9d3, 0xb8d8be, 0xf2d5a9, 0xeaafd1, 0xa5c9c9,
         0xd2c1a5, 0xb5c7b5, 0xc3b5d3, 0xd3a5ad, 0xc9b199, 0x9da5c9
     ];
 
-    // Add a sphere for each cat breed
-    projectedData.forEach((cat, index) => {
-        const x = cat.PC1 * scaleFactor;
-        const y = cat.PC2 * scaleFactor;
-        const z = cat.PC3 * scaleFactor;
+    // Add a sphere for each dog breed
+    projectedData.forEach((dog, index) => {
+        const x = dog.PC1 * scaleFactor;
+        const y = dog.PC2 * scaleFactor;
+        const z = dog.PC3 * scaleFactor;
 
         const geometry = new THREE.SphereGeometry(0.15, 16, 16);
         const material = new THREE.MeshPhongMaterial({ color: colors[index % colors.length] });
         const sphere = new THREE.Mesh(geometry, material);
 
-        // Store cat breed data for selection
-        const originalCat = cats.find(c => c.breed === cat.breed);
-        sphere.userData = originalCat;
+        // Store dog breed data for selection
+        const originalDog = dogs.find(c => c.breed === dog.breed);
+        sphere.userData = originalDog;
 
         sphere.position.set(x, y, z);
         scene.add(sphere);
@@ -874,8 +323,8 @@ function initVisualization() {
         // Apply text stroke for better readability
         context.strokeStyle = 'rgba(255, 255, 255, 0.8)';
         context.lineWidth = 3;
-        context.strokeText(cat.breed, 128, 32);
-        context.fillText(cat.breed, 128, 32);
+        context.strokeText(dog.breed, 128, 32);
+        context.fillText(dog.breed, 128, 32);
 
         const texture = new THREE.CanvasTexture(canvas);
         const spriteMaterial = new THREE.SpriteMaterial({
@@ -887,7 +336,7 @@ function initVisualization() {
         sprite.scale.set(2, 0.5, 1);
         scene.add(sprite);
 
-        catPoints.push({ sphere, sprite, breed: cat.breed, x, y, z });
+        dogPoints.push({ sphere, sprite, breed: dog.breed, x, y, z });
     });
 
     // Add coordinate system
@@ -937,7 +386,7 @@ function initVisualization() {
         controls.update();
 
         // Ensure labels face the camera
-        catPoints.forEach(point => {
+        dogPoints.forEach(point => {
             point.sprite.quaternion.copy(camera.quaternion);
         });
 
@@ -966,99 +415,37 @@ function initVisualization() {
         renderer.setSize(newWidth, newHeight);
     });
 
-    // Add raycaster for cat selection
-    const raycaster = new THREE.Raycaster();
-    const mouse = new THREE.Vector2();
-
-    // Cat breed descriptions
-    const breedDescriptions = {
-        "Maine Coon": "The Maine Coon is one of the largest domestic cat breeds, known for their tufted ears, bushy tails, and shaggy coats. They're friendly gentle giants with playful personalities and dog-like loyalty.",
-        "Persian": "Persians are known for their long, luxurious coats and flat faces. They're sweet, quiet cats that prefer a calm environment and enjoy lounging rather than climbing or jumping.",
-        "Siamese": "Siamese cats are sleek, vocal, and highly intelligent. Known for their striking blue eyes and color-point coats, they form strong bonds with their people and are often quite demanding of attention.",
-        "Ragdoll": "Ragdolls are large, affectionate cats known for going limp when picked up. With their striking blue eyes and semi-longhair coats, they're gentle companions who follow their owners from room to room.",
-        "Bengal": "Bengals have wild-looking spotted coats but domestic temperaments. Active and athletic, they love to climb, play in water, and need plenty of stimulation. Their coat has a unique, plush feel unlike other cats.",
-        "Sphynx": "The hairless Sphynx is warm and soft to touch with an outgoing, attention-seeking personality. Despite lacking fur, they require regular bathing to remove skin oils and are very affectionate, heat-seeking missiles.",
-        "Scottish Fold": "Famous for their folded ears and round faces, Scottish Folds are sweet-tempered and adaptable cats. They're moderately active and enjoy interactive play while maintaining a calm demeanor.",
-        "British Shorthair": "British Shorthairs are sturdy, dignified cats with dense plush coats. Known for their reserved yet affectionate nature, they're low-maintenance companions who prefer four-on-the-floor to being carried.",
-        "Abyssinian": "The Abyssinian is one of the oldest known cat breeds, with a ticked coat and lithe body. Active and highly intelligent, these cats need engaging toys and plenty of playtime to stay happy.",
-        "Russian Blue": "Russian Blues have plush, silvery-blue coats and emerald green eyes. Reserved with strangers but loyal to their families, they're quiet, clean cats with a gentle demeanor and playful side.",
-        "Norwegian Forest Cat": "The Norwegian Forest Cat is large, semi-longhaired, and built for harsh Scandinavian winters. They're skilled climbers with water-resistant coats, independent yet friendly with a strong hunting instinct.",
-        "Domestic Shorthair": "Domestic Shorthairs are the 'mutts' of the cat world—varied in appearance but often healthy and well-balanced in temperament. They're America's most common cats, coming in endless color variations.",
-        "Munchkin": "Munchkins are characterized by their short legs caused by a natural genetic mutation. Despite their short stature, they're energetic, playful cats who can still run and jump, just not as high as other breeds.",
-        "Devon Rex": "With large ears and wavy, downy-soft coat, the Devon Rex is often called the 'pixie cat' or 'poodle cat.' They're incredibly social, mischievous, and remain kitten-like well into adulthood.",
-        "Burmese": "Burmese cats are medium-sized with muscular bodies and golden eyes. Incredibly people-oriented, they're often described as 'dog-like' in their loyalty and desire to be involved in everything their humans do.",
-        "Savannah": "Savannahs are a hybrid breed created by crossing domestic cats with African Servals. They're extremely athletic with long legs, distinctive spotted coats, and dog-like personalities including loyalty and ability to be walked on a leash.",
-        "Birman": "Birmans are semi-longhaired color-point cats with distinctive white 'gloves' on all four paws. They're gentle, patient cats with soft voices who adapt well to most household situations and other pets.",
-        "Egyptian Mau": "The Egyptian Mau is the only naturally spotted domestic cat breed. They're extremely fast runners with a graceful gait, moderately active, somewhat shy with strangers but devoted to their families.",
-        "Cornish Rex": "With their wavy coat, large ears, and egg-shaped head, Cornish Rex cats are distinctive in appearance. They're extraordinarily playful, remaining kitten-like well into old age, and are warm to the touch due to their thin coat.",
-        "Bombay": "The Bombay was developed to resemble a miniature black panther. With gleaming black coats and copper eyes, they're medium-sized, muscular cats who are affectionate and often form strong bonds with one person.",
-        "Himalayan": "Himalayans combine the body type of a Persian with the colorpoint pattern of a Siamese. They share the Persian's sweet, gentle temperament but tend to be a bit more active and playful.",
-        "Exotic Shorthair": "Often called 'the lazy man's Persian,' Exotic Shorthairs have the Persian's teddy-bear look with a short, plush coat that requires less grooming. They're quiet, loyal companions who enjoy playtime but don't demand it.",
-        "Tonkinese": "Tonkinese cats are a cross between Siamese and Burmese, with a medium build and moderate voice. Social and intelligent, they thrive on interaction and can learn tricks, follow commands, and even walk on leashes.",
-        "American Shorthair": "American Shorthairs are sturdy, athletic cats developed from working cats who traveled with early settlers. They're adaptable, good-natured companions with strong hunting instincts and moderate activity levels.",
-        "Turkish Van": "The Turkish Van is known as the 'swimming cat' due to their unusual love of water. They have a unique cashmere-like coat that's water-resistant, and they're athletic, intelligent cats who bond strongly with their people."
-    };
-
-    // Mapping between our breed names and The Cat API breed IDs
-    const catApiBreedMap = {
-        "Maine Coon": "mcoo",
-        "Persian": "pers",
-        "Siamese": "siam",
-        "Ragdoll": "ragd",
-        "Bengal": "beng",
-        "Sphynx": "sphy",
-        "Scottish Fold": "sfol",
-        "British Shorthair": "bsho",
-        "Abyssinian": "abys",
-        "Russian Blue": "rblu",
-        "Norwegian Forest Cat": "norw",
-        "Domestic Shorthair": "dsh", // not an official API breed
-        "Munchkin": "munc",
-        "Devon Rex": "drex",
-        "Burmese": "burm",
-        "Savannah": "sava",
-        "Birman": "birm",
-        "Egyptian Mau": "emau",
-        "Cornish Rex": "crex",
-        "Bombay": "bomb",
-        "Himalayan": "hima",
-        "Exotic Shorthair": "esho",
-        "Tonkinese": "tonk",
-        "American Shorthair": "asho",
-        "Turkish Van": "tvan"
-    };
-
     // Function to update breed information panel
-    async function showBreedInfo(cat) {
+    async function showBreedInfo(dog) {
         const breedStatsElement = document.getElementById('breed-stats');
 
         let html = `
-            <h3>${cat.breed}</h3>
+            <h3>${dog.breed}</h3>
             <div class="image-loading">Loading image...</div>
-            <p class="breed-description">${breedDescriptions[cat.breed] || "No description available."}</p>
+            <p class="breed-description">${breedDescriptions[dog.breed] || "No description available."}</p>
             <div class="stat-grid">
         `;
 
         // Add stats with visual bars
         const attributes = [
-            { name: 'Size', value: cat.size },
-            { name: 'Energy', value: cat.energy },
-            { name: 'Shedding', value: cat.shedding },
-            { name: 'Vocal', value: cat.vocal },
-            { name: 'Friendly', value: cat.friendly },
-            { name: 'Independence', value: cat.independence },
-            { name: 'Grooming Needs', value: cat.grooming },
-            { name: 'Affection', value: cat.affection },
-            { name: 'Intelligence', value: cat.intelligence },
-            { name: 'Child Friendly', value: cat.child_friendly },
-            { name: 'Pet Friendly', value: cat.pet_friendly },
-            { name: 'Health', value: cat.health },
-            { name: 'Lifespan', value: cat.lifespan },
-            { name: 'Adaptability', value: cat.adaptability },
-            { name: 'Indoor Preference', value: cat.indoor_preference },
-            { name: 'Daytime Activity', value: cat.daytime_active },
-            { name: 'Cost', value: cat.cost },
-            { name: 'Hunting Instinct', value: cat.hunting }
+            { name: 'Size', value: dog.size },
+            { name: 'Energy', value: dog.energy },
+            { name: 'Shedding', value: dog.shedding },
+            { name: 'Vocal', value: dog.vocal },
+            { name: 'Friendly', value: dog.friendly },
+            { name: 'Independence', value: dog.independence },
+            { name: 'Grooming Needs', value: dog.grooming },
+            { name: 'Affection', value: dog.affection },
+            { name: 'Intelligence', value: dog.intelligence },
+            { name: 'Child Friendly', value: dog.child_friendly },
+            { name: 'Pet Friendly', value: dog.pet_friendly },
+            { name: 'Health', value: dog.health },
+            { name: 'Lifespan', value: dog.lifespan },
+            { name: 'Adaptability', value: dog.adaptability },
+            { name: 'Indoor Preference', value: dog.indoor_preference },
+            { name: 'Daytime Activity', value: dog.daytime_active },
+            { name: 'Cost', value: dog.cost },
+            { name: 'Hunting Instinct', value: dog.hunting }
         ];
 
         attributes.forEach(attr => {
@@ -1075,51 +462,53 @@ function initVisualization() {
         html += '</div>';
         breedStatsElement.innerHTML = html;
 
-        // Fetch cat image from The Cat API
+        // Fetch dog image from The Dog API
         try {
-            // Set the API key from .env file
-            const apiKey = 'live_3kkCJsM8fhgmuAgUj8mvs0uY7G5JnmNRLozt5NS9ebXHoAY4gtqOY38fjuJ23Lii';
-            axios.defaults.headers.common['x-api-key'] = apiKey;
+            // Get the Dog API breed ID
+            const breedPath = dogApiBreedMap[dog.breed];
 
-            // Get the Cat API breed ID
-            const breedId = catApiBreedMap[cat.breed];
+            if (breedPath) {
+                // Make the API request
+                const imageUrl = `https://dog.ceo/api/breed/${breedPath}/images/random`;
+                try {
+                    const response = await fetch(imageUrl);
+                    const data = await response.json();
 
-            // Default parameters if we don't have a specific breed mapping
-            let params = { limit: 1, size: "med" };
-
-            // If we have a specific breed ID, include it in the query
-            if (breedId) {
-                params.breed_ids = breedId;
-            } else {
-                // If no breed ID, search by breed name
-                params.q = cat.breed;
-            }
-
-            // Make the API request
-            const response = await axios.get('https://api.thecatapi.com/v1/images/search', { params });
-
-            if (response.data && response.data.length > 0) {
-                const imageUrl = response.data[0].url;
-
-                // Create an image element to preload the image
-                const img = new Image();
-                img.onload = function() {
-                    // Once loaded, update the HTML to replace the loading message with the actual image
+                    if (data.status === "success" && data.message) {
+                        // Create an image element to preload the image
+                        const img = new Image();
+                        img.onload = function() {
+                            // Once loaded, update the HTML to replace the loading message with the actual image
+                            const imageContainer = breedStatsElement.querySelector('.image-loading');
+                            if (imageContainer) {
+                                imageContainer.outerHTML = `<div class="breed-image"><img src="${data.message}" alt="${dog.breed} dog"></div>`;
+                            }
+                        };
+                        img.src = data.message;
+                    } else {
+                        // If no image found, show an error message
+                        const imageContainer = breedStatsElement.querySelector('.image-loading');
+                        if (imageContainer) {
+                            imageContainer.innerHTML = "No image available";
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error fetching dog image:', error);
+                    // Update the loading message to show the error
                     const imageContainer = breedStatsElement.querySelector('.image-loading');
                     if (imageContainer) {
-                        imageContainer.outerHTML = `<div class="breed-image"><img src="${imageUrl}" alt="${cat.breed} cat"></div>`;
+                        imageContainer.innerHTML = "Error loading image";
                     }
-                };
-                img.src = imageUrl;
+                }
             } else {
-                // If no image found, show an error message
+                // If no breed mapping, show an error message
                 const imageContainer = breedStatsElement.querySelector('.image-loading');
                 if (imageContainer) {
-                    imageContainer.innerHTML = "No image available";
+                    imageContainer.innerHTML = "No breed mapping available";
                 }
             }
         } catch (error) {
-            console.error('Error fetching cat image:', error);
+            console.error('Error in showBreedInfo:', error);
             // Update the loading message to show the error
             const imageContainer = breedStatsElement.querySelector('.image-loading');
             if (imageContainer) {
@@ -1128,29 +517,31 @@ function initVisualization() {
         }
     }
 
-    // Add click event to select cats
+    // Add click event to select dogs
     container.addEventListener('click', (event) => {
         // Calculate mouse position in normalized device coordinates (-1 to +1)
+        const mouse = new THREE.Vector2();
         mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
         mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
         // Update the picking ray with the camera and mouse position
+        const raycaster = new THREE.Raycaster();
         raycaster.setFromCamera(mouse, camera);
 
         // Calculate objects intersecting the picking ray
         const intersects = raycaster.intersectObjects(scene.children, true);
 
-        // Find first intersected sphere that has cat data
+        // Find first intersected sphere that has dog data
         for (let i = 0; i < intersects.length; i++) {
             const object = intersects[i].object;
             if (object.type === 'Mesh' && object.userData.breed) {
-                // Highlight selected cat
+                // Highlight selected dog
                 object.material.emissive.set(0x555555);
                 setTimeout(() => {
                     object.material.emissive.set(0x000000);
                 }, 300);
 
-                // Show the cat info
+                // Show the dog info
                 showBreedInfo(object.userData);
 
                 // If overlay is hidden, show it
@@ -1183,8 +574,8 @@ function visualizeUserPreferences() {
 
     const { means, principalComponents, attributes } = pcaResult;
 
-    // Create a synthetic "ideal cat" based on user preferences
-    const idealCat = {};
+    // Create a synthetic "ideal dog" based on user preferences
+    const idealDog = {};
     
     // For each attribute, use either the user's preference or the average value
     attributes.forEach(attr => {
@@ -1192,18 +583,18 @@ function visualizeUserPreferences() {
             // If the user cares about this attribute (importance > 0)
             // Use a high value (10) for positive attributes, and a low value (0) for invert attributes
             const isInverted = questions.find(q => q.attribute === attr)?.invert;
-            idealCat[attr] = isInverted ? 0 : 10;
+            idealDog[attr] = isInverted ? 0 : 10;
         } else {
             // Use the average value for attributes the user doesn't care about
-            idealCat[attr] = means[attr];
+            idealDog[attr] = means[attr];
         }
     });
 
-    // Project the ideal cat onto PCA space
+    // Project the ideal dog onto PCA space
     const projectedIdeal = {};
     principalComponents.forEach(pc => {
         projectedIdeal[pc.axis] = attributes.reduce((sum, attr) => {
-            return sum + (idealCat[attr] - means[attr]) * pc.weights[attr];
+            return sum + (idealDog[attr] - means[attr]) * pc.weights[attr];
         }, 0);
     });
 
@@ -1235,7 +626,7 @@ function visualizeUserPreferences() {
     };
     pulseAnimation();
 
-    // Add "Your Ideal Cat" label
+    // Add "Your Ideal Dog" label
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
     canvas.width = 512;
@@ -1248,8 +639,8 @@ function visualizeUserPreferences() {
     // Apply text stroke for better readability
     context.strokeStyle = 'rgba(255, 255, 255, 0.8)';
     context.lineWidth = 3;
-    context.strokeText('★ Your Ideal Cat ★', 128, 32);
-    context.fillText('★ Your Ideal Cat ★', 128, 32);
+    context.strokeText('★ Your Ideal Dog ★', 128, 32);
+    context.fillText('★ Your Ideal Dog ★', 128, 32);
 
     const texture = new THREE.CanvasTexture(canvas);
     const spriteMaterial = new THREE.SpriteMaterial({
