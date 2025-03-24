@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dog Breed Helper</title>
+    <title>Cat Breed Helper</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -13,17 +13,17 @@
 <body>
     <div id="visualization"></div>
     <div class="visualization-info">
-        <p>3D PCA visualization of dog breed traits</p>
+        <p>3D PCA visualization of cat breed traits</p>
     </div>
     <div class="overlay-container">
         <div class="container">
             <div id="breed-info" class="breed-info">
-                <h2>Dog Breed Information</h2>
+                <h2>Cat Breed Information</h2>
                 <div id="breed-stats" class="breed-stats">
-                    <p class="select-prompt">Click on a dog in the visualization to see details</p>
+                    <p class="select-prompt">Click on a cat in the visualization to see details</p>
                 </div>
             </div>
-        <div class= "container"><h2>Find your perfect dog companion!</h2></div>
+        <div class= "container"><h2>Find your perfect cat companion!</h2></div>
         <div id="question-container">
             <h3 id="question"></h3>
             <div id="scale-container">
@@ -44,19 +44,18 @@
             <button id="restart-btn">Start Over</button>
         </div>
         <div id="site-info">
-            <div>What do these dimensions mean? <a href="https://github.com/fredbenenson/dog-chooser/?tab=readme-ov-file#how-pca-works-in-simple-terms">Read about Dog PCA.</a></div>
+            <div>What do these dimensions mean? <a href="https://github.com/fredbenenson/cat-chooser/?tab=readme-ov-file#how-pca-works-in-simple-terms">Read about Cat PCA.</a></div>
             <br>
             <hr>
             <br>
             <div>creator: <a href="http://fredbenenson.com/">Fred Benenson</a> + <a href="https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview">Claude Code</a></div>
 
-            <div>source code: <a href="https://github.com/fredbenenson/dog-chooser/">github</a></div>
-            <div>special thanks: <a href="https://dog.ceo/dog-api/">The Dog API</a></div>
+            <div>source code: <a href="https://github.com/fredbenenson/cat-chooser/">github</a></div>
+            <div>special thanks: <a href="https://thecatapi.com/">The Cat API</a></div>
 
         </div>
     </div>
     <button id="toggle-ui" class="toggle-button">Toggle Questionnaire</button>
-    <script src="dog-breeds.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
