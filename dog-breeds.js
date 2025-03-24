@@ -1178,6 +1178,27 @@ const dogs = [
         daytime_active: 7,
         cost: 7,
         hunting: 3
+    },
+    {
+        breed: "Great Pyrenees",
+        size: 9,
+        energy: 6,
+        shedding: 9,
+        vocal: 7,
+        friendly: 7,
+        independence: 8,
+        grooming: 7,
+        affection: 7,
+        intelligence: 7,
+        child_friendly: 8,
+        pet_friendly: 6,
+        health: 6,
+        lifespan: 6,
+        adaptability: 5,
+        indoor_preference: 4,
+        daytime_active: 6,
+        cost: 7,
+        hunting: 4
     }
 ];
 
@@ -1241,7 +1262,8 @@ const breedDescriptions = {
     "Shiba Inu": "Ancient Japanese breeds with fox-like appearances and independent personalities. Shibas are clean, fastidious, and alert, making good watchdogs. They're loyal to their families but can be aloof and strong-willed, requiring consistent training.",
     "Vizsla": "Sleek, athletic Hungarian pointing dogs with golden-rust coats. Vizslas are energetic, affectionate, and form strong bonds with their people. They need substantial exercise and aren't happy when left alone for long periods.",
     "Weimaraner": "Sleek, silver-gray sporting dogs known as 'the Gray Ghost.' Originally bred for hunting big game, they're athletic, intelligent, and have strong prey drive. Weimaraners bond intensely with their families and can suffer from separation anxiety.",
-    "Yorkshire Terrier": "Tiny terriers with silky blue and tan coats. Despite their small size and glamorous appearance, Yorkies have terrier tenacity and make alert watchdogs. They're affectionate with their families while maintaining a feisty, confident attitude."
+    "Yorkshire Terrier": "Tiny terriers with silky blue and tan coats. Despite their small size and glamorous appearance, Yorkies have terrier tenacity and make alert watchdogs. They're affectionate with their families while maintaining a feisty, confident attitude.",
+    "Great Pyrenees": "Majestic, large guardian dogs with beautiful white coats. Originally bred to guard sheep in the Pyrenees Mountains, they're independent, calm, and protective. Great Pyrenees are patient with family, naturally wary of strangers, and show remarkable devotion to their flock, whether sheep or human family. They thrive with space to roam and their thick double coats require regular maintenance."
 };
 
 // Mapping between our breed names and The Dog API breed IDs/URLs
@@ -1304,7 +1326,8 @@ const dogApiBreedMap = {
     "Shiba Inu": "shiba",
     "Vizsla": "vizsla",
     "Weimaraner": "weimaraner",
-    "Yorkshire Terrier": "terrier/yorkshire"
+    "Yorkshire Terrier": "terrier/yorkshire",
+    "Great Pyrenees": "pyrenees"
 };
 
 // Questions to ask the user
